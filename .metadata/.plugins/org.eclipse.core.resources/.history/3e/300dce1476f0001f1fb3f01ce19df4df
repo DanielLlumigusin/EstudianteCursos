@@ -1,0 +1,5 @@
+package com.curso.ESPE.repository;
+
+public class IEstudianteRepository {
+
+}

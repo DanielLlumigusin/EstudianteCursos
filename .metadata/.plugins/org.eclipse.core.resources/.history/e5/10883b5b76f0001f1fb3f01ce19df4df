@@ -1,0 +1,20 @@
+package com.curso.ESPE.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.curso.ESPE.entity.Estudiante;
+import com.curso.ESPE.repository.IEstudianteRepository;
+
+@Service
+public class EstudianteService {
+
+	@Autowired
+	IEstudianteRepository estudianteRepository;
+	
+	List<Estudiante> getAll(){
+		return ( estudianteRepository.findAll());
+	}
+}

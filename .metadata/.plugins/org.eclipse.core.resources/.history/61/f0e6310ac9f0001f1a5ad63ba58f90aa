@@ -1,0 +1,16 @@
+package com.curso.ESPE.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.curso.ESPE.entity.CursoEstudiante;
+import com.curso.ESPE.repository.ICursoEstudianteRepository;
+
+@Service
+public class CursoEstudianteService {
+
+	@Autowired
+	ICursoEstudianteRepository cursoEstudianteRepository;
+	
+	public CursoEstudiante
+}

@@ -1,0 +1,13 @@
+# Nombre de la aplicacion
+spring.application.name=curso
+
+# Datos de conexion a PostgreSQL
+spring.datasource.url=jdbc:postgresql://localhost:5432/cursos
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# Configuracion JPA
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true

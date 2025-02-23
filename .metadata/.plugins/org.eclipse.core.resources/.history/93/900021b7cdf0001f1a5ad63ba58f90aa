@@ -1,0 +1,5 @@
+package com.curso.ESPE.exception;
+
+public class InscripcionNotFoundException {
+
+}

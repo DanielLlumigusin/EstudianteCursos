@@ -1,0 +1,48 @@
+package com.curso.ESPE.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.curso.ESPE.entity.Curso;
+import com.curso.ESPE.repository.IEstudianteRepository;
+
+@Service
+public class EstudianteService {
+
+	@Autowired
+	IEstudianteRepository estudianteRepository;
+	
+	public List<Curso> getAll(){
+		return (List<Curso>)estudianteRepository.findAll();
+	}
+	
+	public Optional<Curso> getEstudianteById(Long id){
+		return (Optional<Curso>)estudianteRepository.findById(id);
+	}
+	
+	public Curso CreateEstudiante(Curso newEstudiante) {
+		return estudianteRepository.save(newEstudiante);
+	}
+	
+	public boolean UpdateEstudiante(Curso updateEstudiante, Long id) {
+		if(!estudianteRepository.findById(id).isEmpty()) {
+			estudianteRepository.save(updateEstudiante);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public boolean DeleteEstudiante(Long id) {
+		if(!estudianteRepository.findById(id).isEmpty()) {
+			estudianteRepository.deleteById(id);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+}

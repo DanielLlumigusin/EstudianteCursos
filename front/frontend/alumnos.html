@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Alumnos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Gestión de Alumnos</h1>
+    <nav>
+      <a href="index.html" class="btn-primary">
+        <i class="fas fa-home"></i> Inicio
+      </a>
+      <a href="cursos.html" class="btn-primary">
+        <i class="fas fa-book"></i> Cursos
+      </a>
+    </nav>
+  </header>
+  <main>
+    <section id="student-section">
+      <h2>Estudiantes Registrados</h2>
+      <button id="add-student-btn" class="btn-primary">
+        <i class="fas fa-plus"></i> Agregar Estudiante
+      </button>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="students-table">
+          <!-- Datos se llenarán dinámicamente -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Modal para crear/editar estudiante -->
+  <div id="student-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2 id="modal-title">Crear Estudiante</h2>
+      <form id="student-form">
+        <input type="hidden" id="student-id">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" placeholder="Nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input type="text" id="apellido" placeholder="Apellido" required>
+        </div>
+        <button type="submit" class="btn-primary">Guardar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para inscribir en curso -->
+  <div id="enroll-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeEnrollModal()">&times;</span>
+      <h2>Inscribir en Curso</h2>
+      <form id="enroll-form">
+        <div class="form-group">
+          <label for="curso-id">Seleccione Curso</label>
+          <select id="curso-id" required>
+            <!-- Opciones se cargarán dinámicamente -->
+          </select>
+        </div>
+        <button type="submit" class="btn-primary">Inscribir</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="utils.js"></script>
+  <script src="students.js"></script>
+  <script src="enrollment.js"></script>
+  <script src="enrollmentManagement.js"></script>
+
+</body>
+</html>

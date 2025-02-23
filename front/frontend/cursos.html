@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Cursos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Gestión de Cursos</h1>
+        <nav>
+            <a href="index.html" class="btn-primary">
+                <i class="fas fa-home"></i> Inicio
+            </a>
+            <a href="alumnos.html" class="btn-primary">
+                <i class="fas fa-users"></i> Alumnos
+            </a>
+        </nav>
+    </header>
+    <main>
+        <section id="course-section">
+            <h2>Cursos Disponibles</h2>
+            <button id="add-course-btn" class="btn-primary">
+                <i class="fas fa-plus"></i> Agregar Curso
+            </button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>NRC</th>
+                        <th>Créditos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="courses-table">
+                    <!-- Datos se llenarán dinámicamente -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Modal para crear/editar curso -->
+    <div id="course-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="course-modal-title">Crear Curso</h2>
+            <form id="course-form">
+                <input type="hidden" id="course-id"> <!-- Campo oculto para el ID -->
+                <div class="form-group">
+                    <label for="curso-nombre">Nombre del Curso</label>
+                    <input type="text" id="curso-nombre" placeholder="Nombre del Curso" required>
+                </div>
+                <div class="form-group">
+                    <label for="curso-nrc">NRC</label>
+                    <input type="text" id="curso-nrc" placeholder="NRC" required>
+                </div>
+                <div class="form-group">
+                    <label for="curso-creditos">Créditos</label>
+                    <input type="number" id="curso-creditos" placeholder="Créditos" required>
+                </div>
+                <button type="submit" class="btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para ver y gestionar inscripciones del curso -->
+<!-- Modal para ver y gestionar inscripciones del curso -->
+<div id="enrollments-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('enrollments-modal')">&times;</span>
+        <h2 id="enrollment-modal-title">Estudiantes inscritos en <span id="enrollment-course-name"></span></h2>
+        <table>
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Nombre del Estudiante</th>
+                  <th>Acciones</th>
+              </tr>
+          </thead>
+          <tbody id="enrollments-table">
+              <!-- Datos de inscripciones se llenarán aquí -->
+          </tbody>
+        </table>
+    </div>
+  </div>
+  
+
+    <script src="utils.js"></script>
+    <script src="courses.js"></script>
+    <script src="enrollmentManagement.js"></script>
+</body>
+</html>

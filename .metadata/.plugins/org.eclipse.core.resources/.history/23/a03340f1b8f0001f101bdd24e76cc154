@@ -1,0 +1,5 @@
+package com.estudiante.ESPE.config;
+
+public class WebConfig {
+
+}

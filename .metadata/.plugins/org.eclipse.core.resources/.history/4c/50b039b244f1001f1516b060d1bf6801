@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  curso-service:
+    build: .
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres-curso
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-curso:5432/cursos
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 'P@SSWORD123'
+
+  postgres-curso:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 'P@SSWORD123'
+      POSTGRES_DB: cursos
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

@@ -1,0 +1,5 @@
+package com.curso.ESPE.client;
+
+public class EstudianteFeignClient {
+
+}

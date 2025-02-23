@@ -1,0 +1,22 @@
+# Nombre de la aplicación
+spring.application.name=micro-estudiante
+
+# Configuración del servidor
+server.port=8080
+
+# Configuración de la base de datos
+spring.datasource.url=jdbc:mysql://localhost:3307/estudiantes
+spring.datasource.username=root
+spring.datasource.password=root  # Considera usar una contraseña más segura en producción
+
+# Configuración JPA
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.hibernate.ddl-auto=update  # Cambia a 'validate' o 'none' en producción
+
+# Configuración adicional de Hibernate (opcional)
+spring.jpa.properties.hibernate.format_sql=true  # Formatea el SQL para mejor legibilidad
+spring.jpa.properties.hibernate.use_sql_comments=true  # Añade comentarios en el SQL generado
+
+# Configuración de logging (opcional)
+logging.level.org.hibernate.SQL=DEBUG  # Nivel de logging para SQL
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE  # Nivel de logging para parámetros de SQL

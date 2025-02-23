@@ -1,0 +1,63 @@
+package com.curso.ESPE.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.curso.ESPE.model.Estudiante;
+import com.curso.ESPE.service.CursoService;
+
+@RestController
+public class CursoEstudianteController {
+	
+	@Autowired
+	CursoService cursoService;
+	
+	// Agregar un estudiante a un curso
+    @PostMapping("/{courseId}/Estudiantes/{EstudianteId}")
+    public ResponseEntity<?> enrollEstudianteInCourse(
+            @PathVariable Long courseId, @PathVariable Long EstudianteId) {
+        try {
+            CourseEstudiante courseEstudiante = cursoService.enrollEstudianteInCourse(courseId, EstudianteId);
+            return new ResponseEntity<>(courseEstudiante, HttpStatus.CREATED);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // Get all Estudiantes enrolled in a specific course
+    @GetMapping("/{courseId}/Estudiantes")
+    public ResponseEntity<List<Estudiante>> getEstudiantesInCourse(@PathVariable Long courseId) {
+        List<Estudiante> Estudiantes = cursoService.getEstudiantesInCourse(courseId);
+        return new ResponseEntity<>(Estudiantes, HttpStatus.OK);
+    }
+
+    // Get Estudiantes not enrolled in a specific course
+    @GetMapping("/{courseId}/Estudiantes/not-enrolled")
+    public ResponseEntity<List<Estudiante>> getEstudiantesNotInCourse(@PathVariable Long courseId) {
+        List<Estudiante> Estudiantes = cursoService.getEstudiantesNotInCourse(courseId);
+        return new ResponseEntity<>(Estudiantes, HttpStatus.OK);
+    }
+
+
+
+    // Remove a Estudiante from a course
+    @DeleteMapping("/{courseId}/Estudiantes/{EstudianteId}")
+    public ResponseEntity<?> removeEstudianteFromCourse(
+            @PathVariable Long courseId, @PathVariable Long EstudianteId) {
+        try {
+            cursoService.removeEstudianteFromCourse(courseId, EstudianteId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+}
+

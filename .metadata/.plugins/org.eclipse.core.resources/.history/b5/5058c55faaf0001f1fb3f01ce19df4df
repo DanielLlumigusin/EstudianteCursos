@@ -1,0 +1,57 @@
+package com.curso.ESPE.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.curso.ESPE.entity.Estudiante;
+import com.curso.ESPE.service.EstudianteService;
+
+import java.util.Optional;
+
+@RestController 
+@RequestMapping("api/estudiantes")
+public class CursoController {
+
+    @Autowired
+    EstudianteService estudianteService;
+
+    @GetMapping
+    public ResponseEntity<?> findAllEstudiantes() {
+        return ResponseEntity.ok(estudianteService.getAll());
+    }
+
+    @GetMapping("/{idEstudiante}")
+    public ResponseEntity<Object> findEstudianteById(@PathVariable("idEstudiante") Long id) {
+        Optional<Estudiante> estudiante = estudianteService.getEstudianteById(id);
+        return estudiante
+                .<ResponseEntity<Object>>map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Estudiante no encontrado"));
+    }
+
+    @PostMapping
+    public ResponseEntity<?> createEstudiante(@RequestBody Estudiante estudiante) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(estudianteService.CreateEstudiante(estudiante));
+    }
+
+    @PutMapping("/{idEstudiante}")
+    public ResponseEntity<?> updateEstudiante(@PathVariable("idEstudiante") Long id, @RequestBody Estudiante estudiante) {
+        boolean updated = estudianteService.UpdateEstudiante(estudiante, id);
+        if (updated) {
+            return ResponseEntity.ok("Estudiante actualizado correctamente");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Estudiante no encontrado");
+        }
+    }
+
+    @DeleteMapping("/{idEstudiante}") // Corrección de la ruta
+    public ResponseEntity<?> deleteEstudiante(@PathVariable("idEstudiante") Long id) {
+        boolean deleted = estudianteService.DeleteEstudiante(id);
+        if (deleted) {
+            return ResponseEntity.ok("Estudiante eliminado correctamente");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Estudiante no encontrado");
+        }
+    }
+}

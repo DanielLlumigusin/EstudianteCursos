@@ -1,0 +1,53 @@
+package com.curso.ESPE.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import com.curso.ESPE.repository.ICursoRepository;
+
+@RestController
+public class CursoEstudianteController {
+	
+	@Autowired
+	ICursoRepository cursoRepository;
+	
+	// Enroll a student in a course
+    @PostMapping("/{courseId}/students/{studentId}")
+    public ResponseEntity<?> enrollStudentInCourse(
+            @PathVariable Long courseId, @PathVariable Long studentId) {
+        try {
+            CourseStudent courseStudent = courseService.enrollStudentInCourse(courseId, studentId);
+            return new ResponseEntity<>(courseStudent, HttpStatus.CREATED);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // Get all students enrolled in a specific course
+    @GetMapping("/{courseId}/students")
+    public ResponseEntity<List<Student>> getStudentsInCourse(@PathVariable Long courseId) {
+        List<Student> students = courseService.getStudentsInCourse(courseId);
+        return new ResponseEntity<>(students, HttpStatus.OK);
+    }
+
+    // Get students not enrolled in a specific course
+    @GetMapping("/{courseId}/students/not-enrolled")
+    public ResponseEntity<List<Student>> getStudentsNotInCourse(@PathVariable Long courseId) {
+        List<Student> students = courseService.getStudentsNotInCourse(courseId);
+        return new ResponseEntity<>(students, HttpStatus.OK);
+    }
+
+
+
+    // Remove a student from a course
+    @DeleteMapping("/{courseId}/students/{studentId}")
+    public ResponseEntity<?> removeStudentFromCourse(
+            @PathVariable Long courseId, @PathVariable Long studentId) {
+        try {
+            courseService.removeStudentFromCourse(courseId, studentId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+}
+

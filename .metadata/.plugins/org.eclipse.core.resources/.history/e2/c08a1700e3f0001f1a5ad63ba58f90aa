@@ -1,0 +1,48 @@
+package com.curso.ESPE.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.curso.ESPE.entity.Curso;
+import com.curso.ESPE.repository.ICursoRepository;
+
+@Service
+public class CursoService {
+
+	@Autowired
+	ICursoRepository cursoRepository;
+	
+	public List<Curso> getAll(){
+		return (List<Curso>)cursoRepository.findAll();
+	}
+	
+	public Optional<Curso> getCursoById(Long id){
+		return (Optional<Curso>)cursoRepository.findById(id);
+	}
+	
+	public Curso CreateCurso(Curso newCurso) {
+		return cursoRepository.save(newCurso);
+	}
+	
+	public boolean UpdateCurso(Curso updateCurso, Long id) {
+		if(!cursoRepository.findById(id).isEmpty()) {
+			cursoRepository.save(updateCurso);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public boolean DeleteCurso(Long id) {
+		if(!cursoRepository.findById(id).isEmpty()) {
+			cursoRepository.deleteById(id);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+}

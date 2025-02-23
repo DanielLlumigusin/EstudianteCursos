@@ -1,0 +1,48 @@
+package com.curso.ESPE.service;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.curso.ESPE.entity.Curso;
+import com.curso.ESPE.entity.CursoEstudiante;
+import com.curso.ESPE.model.Estudiante;
+import com.curso.ESPE.repository.ICursoEstudianteRepository;
+import com.curso.ESPE.repository.ICursoRepository;
+
+@Service
+public class CursoEstudianteService {
+
+	@Autowired
+	ICursoEstudianteRepository cursoEstudianteRepository;
+	
+	@Autowired
+	ICursoRepository cursoRepository;
+	
+	public CursoEstudiante inscribirEstudianteCurso(Long cursoId, Long estudianteId) {
+		Curso curso = cursoRepository.findById(estudianteId)
+				.orElseThrow(() -> new RuntimeException("Curso no Econtrado"));
+		EstudianteFeignClient.getStudent(estudianteId);
+		
+		Optional<CursoEstudiante> existenciaInscripcion = cursoEstudianteRepository.findByCursoIdAndEstudianteId(cursoId, estudianteId);
+		
+		CursoEstudiante cursoEstudiante = new CursoEstudiante();
+		cursoEstudiante.setCourse(curso);
+		cursoEstudiante.setStudentId(estudianteId);
+		cursoEstudiante.setFechaInscripcion(LocalDate.now());
+		
+		return cursoEstudianteRepository.save(cursoEstudiante);
+	}
+	
+	public List<CursoEstudiante> getEstudianteInCurso(Long cursoId){
+		List<CursoEstudiante> cursoEstudiante = cursoEstudianteRepository.findByCursoId(cursoId);
+		List<Estudiante> estudiantes = new ArrayList();
+		for(CursoEstudiante cursoEstudiante : cursoEstudiantes) {
+			Long estudianteId = cursoEstudiante.getStudentId();
+		}
+	}
+}

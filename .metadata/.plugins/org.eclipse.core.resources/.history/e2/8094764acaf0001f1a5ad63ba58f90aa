@@ -1,0 +1,32 @@
+package com.curso.ESPE.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.curso.ESPE.entity.Curso;
+import com.curso.ESPE.entity.CursoEstudiante;
+import com.curso.ESPE.repository.ICursoEstudianteRepository;
+import com.curso.ESPE.repository.ICursoRepository;
+
+@Service
+public class CursoEstudianteService {
+
+	@Autowired
+	ICursoEstudianteRepository cursoEstudianteRepository;
+	
+	@Autowired
+	ICursoRepository cursoRepository;
+	
+	public CursoEstudiante inscribirEstudianteCurso(Long cursoId, Long estudianteId) {
+		Curso curso = cursoRepository.findById(estudianteId)
+				.orElseThrow(() -> new RuntimeException("Curso no Econtrado"));
+		EstudianteFeignClient.getStudent(estudianteId);
+		
+		Optional<CursoEstudiante> existenciaInscripcion = cursoEstudianteRepository.findByCursoIdAndEstudianteId(cursoId, estudianteId);
+		
+		CursoEstudiante cursoEstudiante = new CursoEstudiante();
+		
+	}
+}

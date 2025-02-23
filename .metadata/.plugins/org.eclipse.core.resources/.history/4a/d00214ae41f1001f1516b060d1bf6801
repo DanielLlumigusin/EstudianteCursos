@@ -1,0 +1,14 @@
+# Usamos la imagen oficial de OpenJDK 17 (puedes cambiar según tu versión de Java)
+FROM openjdk:17-jdk-slim
+
+# Establecemos el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copiamos el archivo JAR generado por Spring Boot
+COPY target/curso.jar curso.jar
+
+# Exponemos el puerto en el que corre la aplicación (ajusta según la configuración)
+EXPOSE 8080
+
+# Comando para ejecutar la aplicación
+CMD ["java", "-jar", "curso-service.jar"]

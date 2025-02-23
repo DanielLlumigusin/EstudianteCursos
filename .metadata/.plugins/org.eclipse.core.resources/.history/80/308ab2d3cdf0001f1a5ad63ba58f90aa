@@ -1,0 +1,19 @@
+package com.curso.ESPE.exception;
+
+public class CursoNotFoundException extends RuntimeException {
+    public CursoNotFoundException(String message) {
+        super(message);
+    }
+}
+
+public class EstudianteNotFoundException extends RuntimeException {
+    public EstudianteNotFoundException(String message) {
+        super(message);
+    }
+}
+
+public class InscripcionNotFoundException extends RuntimeException {
+    public InscripcionNotFoundException(String message) {
+        super(message);
+    }
+}

@@ -1,0 +1,12 @@
+spring.application.name=estudiante
+
+server.port=8080
+
+spring.datasource.url=jdbc:mysql://localhost:3306/estudiantes
+spring.datasource.username=root
+spring.datasource.password=root
+
+# Configuración JPA
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
